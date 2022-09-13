@@ -1,9 +1,33 @@
-import { View } from 'react-native'
+/* eslint-disable camelcase */
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black
+} from '@expo-google-fonts/inter'
+import React from 'react'
+import { StatusBar } from 'react-native'
+import { Background } from './src/components'
+import { Home, Loading } from './src/screens'
 
 export default function App() {
-  return (
-    <View>
+  const [fontLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black
+  })
 
-    </View>
+  return (
+    <Background>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      {fontLoaded ? <Home /> : <Loading />}
+    </Background>
   )
 }
+
