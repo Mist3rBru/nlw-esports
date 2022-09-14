@@ -1,0 +1,38 @@
+version: '3'
+
+networks:
+  app_network:
+
+services:
+  api:
+    container_name: api-container
+    image: api
+    restart: always
+    build:
+      context: ../backend
+      dockerfile: ./Dockerfile.api
+    environment:
+    - DATABASE_URL=file:../src/database/db.sqlite
+    - APP_PORT=3030
+    - APP_HOST=http://localhost:3000
+    ports:
+      - '3030:3030'
+    networks:
+      - app_network
+    command: bash -c "npm run prisma:dev && npm run dev"
+
+  client:
+    container_name: client-container
+    image: client
+    restart: always
+    build:
+      context: ../frontend
+      dockerfile: ./Dockerfile.client
+    environment:
+      - VITE_API_URL=http://localhost:3030
+    ports:
+      - '3000:82'
+    depends_on:
+      - api
+    networks:
+      - app_network

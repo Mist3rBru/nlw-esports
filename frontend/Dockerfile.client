@@ -1,0 +1,21 @@
+FROM node:14 as modules
+WORKDIR /client
+COPY /package.json ./
+RUN npm install
+
+FROM modules as base
+COPY /public ./public
+COPY /src ./src
+COPY /index.html ./
+COPY /postcss* ./
+COPY /tailwind* ./
+COPY /tsconfig* ./
+COPY /vite* ./
+COPY /.env ./
+
+FROM base as build
+RUN npm run build
+
+FROM nginx:1.22 as development
+COPY --from=build /client/dist/ /usr/share/nginx/html
+COPY /nginx.config /etc/nginx/conf.d/default.conf
