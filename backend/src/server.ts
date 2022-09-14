@@ -1,11 +1,7 @@
-import { createServer, IncomingMessage, ServerResponse } from 'http'
+import 'dotenv/config'
+import { App } from './app'
 
+const app = new App()
 const port = process.env.APP_PORT || '3000'
 
-const server = createServer((req: IncomingMessage, res: ServerResponse) => {
-  res.end('***  Hello World  ***')
-})
-
-server.listen(port).on('listening', () => {
-  process.stdout.write(`Server running on http://localhost:${port}`)
-})
+app.listen(port)
