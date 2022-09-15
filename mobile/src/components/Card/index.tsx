@@ -3,7 +3,6 @@ import React from 'react'
 import {
   ImageBackground,
   TouchableOpacity,
-  ImageSourcePropType,
   TouchableOpacityProps,
   Text
 } from 'react-native'
@@ -11,19 +10,25 @@ import { THEME } from '../../theme'
 
 import { styles } from './styles'
 
-export interface CardProps {
+export interface Game {
   id: string
-  name: string
-  ads: string
-  cover: ImageSourcePropType
+  ads: number
+  title: string
+  bannerUrl: string
+  createdAt: string
 }
 
-export function Card(props: CardProps & TouchableOpacityProps) {
+export function Card(props: Game & TouchableOpacityProps) {
   return (
     <TouchableOpacity style={styles.container} {...props}>
-      <ImageBackground style={styles.cover} source={props.cover}>
+      <ImageBackground
+        style={styles.cover}
+        source={{
+          uri: props.bannerUrl
+        }}
+      >
         <LinearGradient colors={THEME.COLORS.FOOTER} style={styles.footer}>
-          <Text style={styles.name}>{props.name}</Text>
+          <Text style={styles.name}>{props.title}</Text>
           <Text style={styles.ads}>{props.ads} anúncios</Text>
         </LinearGradient>
       </ImageBackground>

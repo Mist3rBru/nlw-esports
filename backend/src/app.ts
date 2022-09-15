@@ -14,7 +14,7 @@ export class App {
   }
 
   private setupMiddlewares (): void {
-    this.app.use(cors({origin: process.env.APP_HOST}))
+    this.app.use(cors())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: false }))
     this.app.use(this.router)

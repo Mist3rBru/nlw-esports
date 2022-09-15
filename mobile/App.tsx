@@ -9,7 +9,8 @@ import {
 import React from 'react'
 import { StatusBar } from 'react-native'
 import { Background } from './src/components'
-import { Home, Loading } from './src/screens'
+import { Routes } from './src/routes'
+import { LoadingScreen } from './src/screens'
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -26,7 +27,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent={true}
       />
-      {fontLoaded ? <Home /> : <Loading />}
+      {fontLoaded ? <Routes /> : <LoadingScreen />}
     </Background>
   )
 }
