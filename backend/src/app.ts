@@ -1,7 +1,6 @@
 import express, { Express, Router } from 'express'
 import { readdirSync } from 'fs'
 import { resolve } from 'path'
-import cors from 'cors'
 
 export class App {
   private readonly app: Express
@@ -14,7 +13,6 @@ export class App {
   }
 
   private setupMiddlewares (): void {
-    this.app.use(cors({origin: process.env.APP_HOST}))
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: false }))
     this.app.use(this.router)
