@@ -7,7 +7,7 @@ import { Card, Game, Heading } from '../../components'
 import logoImg from '../../assets/logo-nlw-esports.png'
 import { styles } from './styles'
 
-export function Home() {
+export function HomeScreen() {
   const [games, setGames] = useState<Game[]>([])
 
   useEffect(() => {
