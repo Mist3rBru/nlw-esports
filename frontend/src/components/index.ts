@@ -1,5 +1,6 @@
 export * from './Background'
 export * from './CreateAdBanner'
+export * from './CreateAdModal'
 export * from './FieldInput'
 export * from './GameCard'
 export * from './Input'
