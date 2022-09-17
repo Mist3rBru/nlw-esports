@@ -7,13 +7,15 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import * as Select from '@radix-ui/react-select'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
+import axios from 'axios'
 
 interface CreateAdModalProps {
   games: Game[]
 }
 
 export function CreateAdModal(props: CreateAdModalProps): JSX.Element {
-  const [weekdays, setWeekdays] = useState<string[]>([])
+  const [weekDays, setWeekDays] = useState<string[]>([])
+  const [useVoiceChannel, setUseVoiceChannel] = useState(false)
 
   const week: Record<number, string> = {
     0: 'Domingo',
@@ -25,14 +27,26 @@ export function CreateAdModal(props: CreateAdModalProps): JSX.Element {
     6: 'Sábado'
   }
 
-  const handleSubmit = useCallback((event: FormEvent) => {
+  const handleSubmit = useCallback(async (event: FormEvent) => {
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
-    console.log(data)
-    // fetch(`${import.meta.env.VITE_API_HOST}/ad/${data.}`, {
-    //   method: 'post'
-    // })
+    const body = {
+      ...data,
+      weekDays: weekDays.join(' '),
+      useVoiceChannel,
+      yearsPlaying: Number(data.yearsPlaying)
+    }
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_HOST}/ad/${data.gameId}`,
+        body
+      )
+      alert('Anúncio criado com sucesso')
+    } catch (error) {
+      alert('Erro ao criar anúncio')
+      console.error(error)
+    }
   }, [])
 
   return (
@@ -120,8 +134,8 @@ export function CreateAdModal(props: CreateAdModalProps): JSX.Element {
               <ToggleGroup.Root
                 type="multiple"
                 className="flex gap-1"
-                onValueChange={setWeekdays}
-                value={weekdays}
+                onValueChange={setWeekDays}
+                value={weekDays}
               >
                 {Object.entries(week).map(([n, day]) => (
                   <ToggleGroup.Item
@@ -129,7 +143,7 @@ export function CreateAdModal(props: CreateAdModalProps): JSX.Element {
                     value={n}
                     title={day}
                     className={`p-3 rounded ${
-                      weekdays.includes(n) ? 'bg-violet-500' : 'bg-zinc-900'
+                      weekDays.includes(n) ? 'bg-violet-500' : 'bg-zinc-900'
                     }`}
                   >
                     {day.substring(0, 1)}
@@ -148,23 +162,27 @@ export function CreateAdModal(props: CreateAdModalProps): JSX.Element {
             </div>
           </div>
           <label className="flex items-center gap-2 text-sm">
-            <Checkbox.Root className="w-6 h-6 p-1 rounded bg-zinc-900">
+            <Checkbox.Root
+              className="w-6 h-6 p-1 rounded bg-zinc-900"
+              onCheckedChange={checked => {
+                checked === true
+                  ? setUseVoiceChannel(true)
+                  : setUseVoiceChannel(false)
+              }}
+            >
               <Checkbox.Indicator>
-                <Check
-                  name="useVoiceChannel"
-                  className="w-4 h-4 text-emerald-400"
-                />
+                <Check className="w-4 h-4 text-emerald-400" />
               </Checkbox.Indicator>
             </Checkbox.Root>
             Costumo me conectar ao chat de voz
           </label>
           <footer className="flex justify-end items-center gap-4 mt-8">
-            <button
+            <Dialog.Close
               type="button"
               className="bg-zinc-500 hover:bg-zinc-600 px-4 h-12 rounded-md font-semibold"
             >
               Cancelar
-            </button>
+            </Dialog.Close>
             <button
               type="submit"
               className="bg-violet-500 hover:bg-violet-600 px-4 h-12 rounded-md font-semibold flex items-center gap-4"

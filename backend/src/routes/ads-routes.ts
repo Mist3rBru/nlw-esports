@@ -9,7 +9,6 @@ export default (router: Router): void => {
     const data = await db.ad.create({
       data: {
         ...req.body,
-        gameId: req.params.gameId,
         hourStart: time.convertHoursToMinutes(req.body.hourStart),
         hourEnd: time.convertHoursToMinutes(req.body.hourEnd)
       }
