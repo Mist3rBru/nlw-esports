@@ -7,7 +7,7 @@ module.exports = {
         sans: ['Inter', 'sans-serif']
       },
       backgroundImage: {
-        galaxy: 'url(background-galaxy@3x.png)',
+        galaxy: 'url(/background-galaxy@3x.png)',
         'nlw-gradient':
           'linear-gradient(89.86deg, #9572FC 0%, #43E7AD 20%, #E1D55D 40%, #9572FC 60%, #43E7AD 80%, #E1D55D 100%)',
         'game-gradient':
