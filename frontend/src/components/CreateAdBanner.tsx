@@ -9,7 +9,7 @@ export function CreateAdBanner() {
         mt-8 px-8 py-6 bg-[#2A2634]
         self-stretch rounded-lg overflow-hidden
         before:absolute before:top-0 before:left-0
-        before:h-1 before:w-full before:bg-nlw-gradient
+        before:h-1 before:w-full before:bg-nlw-gradient before:bg-600 before:animate-nlw-gradient
       "
     >
       <div className="flex flex-col">

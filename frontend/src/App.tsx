@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Background, Game, GameCard, CreateAdBanner, CreateAdModal } from './components'
+import {
+  Background,
+  Game,
+  GameCard,
+  CreateAdBanner,
+  CreateAdModal
+} from './components'
 import * as Dialog from '@radix-ui/react-dialog'
 
 export default function App() {
@@ -18,7 +24,7 @@ export default function App() {
 
         <h1 className="text-6xl text-white font-black mt-20">
           Seu{' '}
-          <span className="bg-nlw-gradient text-transparent bg-clip-text">
+          <span className="text-transparent bg-clip-text bg-nlw-gradient animate-nlw-gradient bg-600">
             duo
           </span>{' '}
           está aqui
