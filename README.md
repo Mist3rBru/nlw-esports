@@ -11,7 +11,7 @@ Este projeto foi durante o evento **#NLWtogether** promovido pela [Rocketseat](h
 ## Possíveis Melhorias
 
 - [x]   Substituir o `select` padrão do HTML pelo [select do Radix-UI](https://www.radix-ui.com/docs/primitives/components/select);
-- []   Responsividade mobile na aplicação web;
-- []   Criação de um carrossel, caso tenhamos mais jogos cadastrados no back-end (sugestão de lib: [Keen Slider](https://keen-slider.io/));
-- []   Validação do formulário com [React Hook Form](https://react-hook-form.com/);
-- []   Autenticação com o Discord, que preencheria automaticamente o campo do Discord no formulário.
+- [ ]   Responsividade mobile na aplicação web;
+- [ ]   Criação de um carrossel, caso tenhamos mais jogos cadastrados no back-end (sugestão de lib: [Keen Slider](https://keen-slider.io/));
+- [ ]   Validação do formulário com [React Hook Form](https://react-hook-form.com/);
+- [ ]   Autenticação com o Discord, que preencheria automaticamente o campo do Discord no formulário.
